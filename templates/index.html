@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdict Predictor</title>
+    
+    <link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+
+    <nav id="nav" class="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Verdict Predictor</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse  justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#Home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#Verdict">Predict</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#registration">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#docket">Docket</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#instructions">Instructions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contactUs">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div data-bs-spy="scroll" data-bs-target="#nav" tabindex="0">
+      <section id="Home">
+        <div class="container-fluid">
+          <p>
+            Automated Verdict Prediction System
+          </p>
+        </div>
+        <div class="">
+          <img src="" alt="">
+        </div>
+      </section>
+  
+      
+      <section class="container-fluid d-flex predict" id="Verdict">
+          <div class="" id="input">
+            <fieldset>
+              <legend>Verdict Predictor</legend>
+              <label for="petitionerName" class="form-label">Petitioner Name:</label>
+              <input class="form-control" type="text" name="petitionerName" id="petitionerName" placeholder="Lallitendra" value="miller" required>
+              <label for="respondantName" class="form-label">Respondent Name:</label>
+              <input class="form-control" type="text" name="respondentName" id="respondentName" placeholder="Jyotsna" value="calfornia" required>
+              <label for="factsCollected" class="form-label">Facts Collected:</label>
+              <textarea class="form-control" name="factsCollected" id="factsCollected" cols="59" rows="5" >Miller, after conducting a mass mailing campaign to advertise the sale of "adult" material, was convicted of violating a California statute prohibiting the distribution of obscene material. Some unwilling recipients of Miller's brochures complained to the police, initiating the legal proceedings.</textarea>
+              <input class="btn btn-primary mb-3" type="submit" value="Submit" id="verdictRequest">
+            </fieldset>
+          </div>
+          <div id="output">
+            <h2 class="output-title"><u>Output: -</u></h2>
+            <span id="output-img-box"></span>
+            <textarea class="form-control" name="predcitDescription" id="verdictResponse" cols="21" rows="5"></textarea>
+          </div>
+      </section>
+  
+      <section class="container-fluid" id="registration">
+        <legend>Registration</legend>
+        <form action="#" method="post">
+          <fieldset class="reg-card shadow">
+            
+            <label for="name" class="form-label">Name:</label>
+            <input class="form-control" type="text" name="name" id="">
+            <label for="address" class="form-label">Address:</label>
+            <textarea class="form-control" name="address" id="" cols="21" rows="5"></textarea>
+            <label for="contact" class="form-label">Contact:</label>
+            <input class="form-control" type="text" name="contact" id="">
+            <label for="caseType" class="form-label">Case Type:</label>
+            <input class="form-control" type="text" name="caseType" id="">
+            <label for="lawyerName" class="form-label">Lawyer Name:</label>
+            <input class="form-control" type="text" name="lawyerName" id="">
+            <input class="btn btn-primary mb-3" type="submit" value="Submit">
+          </fieldset>
+        </form>
+      </section>
+  
+      <section class="container-fluid" id="docket">
+        <div class="d-flex">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="filter" id="" checked>
+            <label for="solved" class="form-check-label">Solved</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="filter" id="">
+            <label for="unsolved" class="form-check-label">Unsolved</label>
+          </div>
+        </div>
+        <div>
+          <table border="1">
+            <thead>
+              <th>Date</th>
+              <th>Name of the Opponent</th>
+              <th>Lawyer Name</th>
+              <th>Case Type</th>
+              <th>ID</th>
+              <th>Contact</th>
+            </thead>
+            <tr>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+            </tr>
+            <tr>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+            </tr>
+            <tr>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+            </tr>
+            <tr>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+              <td>sample</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+  
+      <section class="container-fluid" id="instructions">
+        <div><h2><u>Instructions</u></h2></div>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, saepe velit! Eius nobis magni illo enim? Reprehenderit, quae. Neque eos id eaque nihil iure minima atque incidunt voluptatibus natus facilis.
+          Animi debitis error minima quod dignissimos? Veritatis dicta odio animi. Debitis, sint recusandae. Aut, maiores veritatis! Aliquid provident eveniet aut optio excepturi porro nihil sapiente laborum in eos? Consequatur, debitis.
+          Quod ab aperiam, quaerat distinctio, fugiat cumque nisi soluta a repellendus, voluptates consequuntur repellat minus ipsam quo minima dolores nostrum commodi quibusdam eaque repudiandae modi vitae? Ullam sed cumque adipisci.
+          Eligendi laboriosam aut in omnis voluptate tempore eius aspernatur asperiores animi fuga repudiandae, obcaecati iste eaque totam aperiam sit facilis repellat perferendis ipsam fugiat alias. Pariatur eos deserunt dolor cumque!
+          Quae, natus officia provident architecto autem animi laudantium illum saepe rerum molestias reiciendis asperiores atque incidunt ut dolor nostrum tenetur alias quibusdam ullam fugit, reprehenderit, iusto repudiandae optio. Cumque, quaerat!
+          Amet, nihil enim velit doloremque voluptate quas unde veritatis error blanditiis rem eligendi incidunt delectus possimus corrupti ab quo odit inventore perspiciatis nemo iste? Alias illum quos aut voluptas. Aut.
+          Hic ipsa vel doloremque atque doloribus quos fugiat a accusantium dolor nam distinctio quae, quod exercitationem repellat, sunt ex incidunt? Quod fugiat optio aut error dolor excepturi nemo nostrum ea.
+          Cupiditate consectetur reiciendis, dolorem repellendus numquam iure ad impedit ea consequatur recusandae dignissimos quidem provident quo architecto. Et expedita itaque nemo sapiente cum adipisci iure possimus dolore similique consequatur! Nostrum.
+          Accusamus consequuntur dolor ut eos sit, quasi eaque voluptate ad totam porro tenetur, doloremque blanditiis nihil. Deleniti, possimus. Tempore dolores, laudantium perspiciatis dolore tempora quae aperiam sint aspernatur rerum ipsam?
+          Quae magni quod blanditiis sequi ipsam cum fuga ad quasi, dolorem excepturi eum maiores alias voluptatem dolores labore consectetur totam aperiam repellendus harum sapiente. Quibusdam, nulla culpa? Ipsa, neque iure.
+        </div>
+      </section>
+  
+      <section class="container-fluid" id="contactUs">
+        <div>
+          <div>
+            <img src="" alt="">
+          </div>
+          <div>
+            <img src="" alt="">
+          </div>
+          <div>
+            <img src="" alt="">
+          </div>
+          <div>
+            <img src="" alt="">
+          </div>
+        </div>
+        
+        <div>
+          <form action="#" method="post">
+            <fieldset>
+              <legend>Contact Us</legend>
+              <label for="name" class="form-label">Name:</label>
+              <input class="form-control" type="text" name="name" id="">
+              <label for="email" class="form-label">Email:</label>
+              <input class="form-control" type="email" name="email" id="">
+              <label for="message" class="form-label">Message:</label>
+              <textarea class="form-control" name="message" id="" cols="21" rows="5"></textarea>
+              <input class="btn btn-primary mb-3" type="submit" value="Submit">
+            </fieldset>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='app.js')}}"></script>
+</body>
+</html>

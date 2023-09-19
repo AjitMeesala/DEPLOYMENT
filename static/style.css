@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 9vh;
+}
+
+section {
+    height: 100vh;
+}
+
+#Home {
+    background-color: blueviolet;
+    background-image: url(./assets/bg-home.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    & p {
+        font-family: ui-sans-serif;
+        color: antiquewhite;
+        font-size: xxx-large;
+        padding-left: 17em;
+        padding-top: 4em;
+    }
+}
+
+/*-------------------------------predict--------------------------------*/
+
+.predict{
+    justify-content: space-around;
+    background-image: linear-gradient(to right, #A6C0FE, #F68084);
+    align-items: center;
+    font-family: roboto;
+}
+
+#petitionerName{
+    width:15vw;
+    margin-bottom:20px;
+}
+
+#respondentName{
+    width:15vw;
+    margin-bottom:20px;
+}
+
+#factsCollected{
+    margin-bottom:20px;
+}
+
+.output-img{
+    margin-bottom: 1em;
+}
+.output-title{
+    margin-bottom: 30px;
+}
+/*-------------------------------predict--------------------------------*/
+
+/*-------------------------------registratin--------------------------------*/
+
+#registration{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.reg-card{
+    display: flex;
+    flex-direction: column;
+    background-color: #E0F2F1;
+    padding: 20px;
+    border-radius: 20px;
+    width: 60vw;
+    justify-content: space-around;
+}
+
+input{
+    margin-bottom: 20px;
+}
+
+/*-------------------------------registration--------------------------------*/
