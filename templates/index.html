@@ -59,18 +59,18 @@
             <fieldset>
               <legend>Verdict Predictor</legend>
               <label for="petitionerName" class="form-label">Petitioner Name:</label>
-              <input class="form-control" type="text" name="petitionerName" id="petitionerName" placeholder="Lallitendra" value="miller" required>
-              <label for="respondantName" class="form-label">Respondent Name:</label>
+              <input class="form-control" type="text" name="petitionerName" id="petitionerName" placeholder="Lallitendra" value="miller" required autocomplete="name">
+              <label for="respondentName" class="form-label">Respondent Name:</label>
               <input class="form-control" type="text" name="respondentName" id="respondentName" placeholder="Jyotsna" value="calfornia" required>
               <label for="factsCollected" class="form-label">Facts Collected:</label>
-              <textarea class="form-control" name="factsCollected" id="factsCollected" cols="59" rows="5" >Miller, after conducting a mass mailing campaign to advertise the sale of "adult" material, was convicted of violating a California statute prohibiting the distribution of obscene material. Some unwilling recipients of Miller's brochures complained to the police, initiating the legal proceedings.</textarea>
+              <textarea class="form-control" name="factsCollected" id="factsCollected" cols="" rows="5" >Miller, after conducting a mass mailing campaign to advertise the sale of "adult" material, was convicted of violating a California statute prohibiting the distribution of obscene material. Some unwilling recipients of Miller's brochures complained to the police, initiating the legal proceedings.</textarea>
               <input class="btn btn-primary mb-3" type="submit" value="Submit" id="verdictRequest">
             </fieldset>
           </div>
           <div id="output">
             <h2 class="output-title"><u>Output: -</u></h2>
             <span id="output-img-box"></span>
-            <textarea class="form-control" name="predcitDescription" id="verdictResponse" cols="21" rows="5"></textarea>
+            <textarea class="form-control" name="predcitDescription" id="verdictResponse" cols="20" rows="4" aria-readonly="true" readonly>Please enter details to predict the verdict...</textarea>
           </div>
       </section>
   
@@ -78,17 +78,43 @@
         <legend>Registration</legend>
         <form action="#" method="post">
           <fieldset class="reg-card shadow">
-            
-            <label for="name" class="form-label">Name:</label>
-            <input class="form-control" type="text" name="name" id="">
-            <label for="address" class="form-label">Address:</label>
-            <textarea class="form-control" name="address" id="" cols="21" rows="5"></textarea>
-            <label for="contact" class="form-label">Contact:</label>
-            <input class="form-control" type="text" name="contact" id="">
-            <label for="caseType" class="form-label">Case Type:</label>
-            <input class="form-control" type="text" name="caseType" id="">
-            <label for="lawyerName" class="form-label">Lawyer Name:</label>
-            <input class="form-control" type="text" name="lawyerName" id="">
+            <div class="row g-3">
+              <div class="col">
+                <label for="name" class="form-label">Name:</label>
+                 <input class="form-control" type="text" name="name" id="name" required autocomplete="name">
+              </div>
+              <div class="col">
+                <label for="street" class="form-label">Street:</label>
+                <input type="text" name="street" id="street" class="form-control" required autocomplete="address-line1">
+              </div>
+              <div class="col">
+                <label for="city" class="form-label">City:</label>
+                <input class="form-control" type="text" name="city" id="city" required autocomplete="address-level2">
+              </div>
+              <div class="col">
+                <label for="state" class="form-label">State:</label>
+                <input class="form-control" type="text" name="state" id="state" required autocomplete="address-level1">
+              </div>
+              <div class="col">
+                <label for="zip" class="form-label">Zip:</label>
+                <input class="form-control" type="text" name="zip" id="zip" required autocomplete="postal-code">
+              </div>
+              <div class="col">
+                <label for="contact" class="form-label">Contact:</label>
+                <span class="input-group">
+                  <span class="input-group-text">+91</span>
+                  <input class="form-control" type="tel" name="contact" id="contact" minlength="10" maxlength="10" required autocomplete="tel">
+                </span>
+              </div>
+              <div class="col">
+                <label for="caseType" class="form-label">Case Type:</label>
+                <input class="form-control" type="text" name="caseType" id="caseType">
+              </div>
+              <div class="col">
+                <label for="lawyerName" class="form-label">Lawyer Name:</label>
+                <input class="form-control" type="text" name="lawyerName" id="lawyerName">
+              </div>
+            </div>
             <input class="btn btn-primary mb-3" type="submit" value="Submit">
           </fieldset>
         </form>
@@ -97,11 +123,11 @@
       <section class="container-fluid" id="docket">
         <div class="d-flex">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="filter" id="" checked>
+            <input class="form-check-input" type="radio" name="filter" id="solved" checked>
             <label for="solved" class="form-check-label">Solved</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="filter" id="">
+            <input class="form-check-input" type="radio" name="filter" id="unsolved">
             <label for="unsolved" class="form-check-label">Unsolved</label>
           </div>
         </div>
@@ -187,12 +213,12 @@
           <form action="#" method="post">
             <fieldset>
               <legend>Contact Us</legend>
-              <label for="name" class="form-label">Name:</label>
-              <input class="form-control" type="text" name="name" id="">
-              <label for="email" class="form-label">Email:</label>
-              <input class="form-control" type="email" name="email" id="">
-              <label for="message" class="form-label">Message:</label>
-              <textarea class="form-control" name="message" id="" cols="21" rows="5"></textarea>
+              <label for="cName" class="form-label">Name:</label>
+              <input class="form-control" type="text" name="cName" id="cName" required autocomplete="name">
+              <label for="cEmail" class="form-label">Email:</label>
+              <input class="form-control" type="email" name="cEmail" id="cEmail" required autocomplete="email">
+              <label for="cMessage" class="form-label">Message:</label>
+              <textarea class="form-control" name="message" id="cMessage" cols="21" rows="5" required></textarea>
               <input class="btn btn-primary mb-3" type="submit" value="Submit">
             </fieldset>
           </form>

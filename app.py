@@ -14,6 +14,9 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 from flask_mysqldb import MySQL
 import mysql.connector
+from PIL import Image
+import io
+import base64
 # nltk.download('punkt')
 # nltk.download('wordnet')
 
@@ -99,9 +102,10 @@ def initiate(temp):
     
     explanation = explainer.explain_instance(temp[0], new_predict) 
     explanation_image = explanation.as_pyplot_figure()
+    return explanation_image
     explanation_image.savefig('static/assets/explanation_image.png', bbox_inches='tight', pad_inches=0)
     # explainer.explain_instance(temp[0],new_predict).show_in_notebook(text=True)  
-    # return '../explanation_image.png'
+    # return 'static/assets/explanation_image.png'
     
 
 
@@ -135,9 +139,12 @@ def submit():
         facts = petitioner_name + " " + respondent_name + " " + facts  
         try:
             img = initiate([facts])
+            data = io.BytesIO()
+            img.save(data, "PNG")
+            encoded_img_data = base64.b64encode(data.getvalue())
             ints = predict_class(facts)
             res = get_response(ints, intents)
-            response = {"verdict": res, "image": img}
+            response = {"verdict": res, "image": encoded_img_data.decode('utf-8')}
         except:
             res="Unable to make decision !!!"
             response = {"verdict": res, "image": ""}

@@ -34,6 +34,10 @@ section {
     background-image: linear-gradient(to right, #A6C0FE, #F68084);
     align-items: center;
     font-family: roboto;
+
+    & div {
+        width: 25em;
+    }
 }
 
 #petitionerName{
@@ -52,6 +56,8 @@ section {
 
 .output-img{
     margin-bottom: 1em;
+    border-radius: 1em;
+    height: 15em;
 }
 .output-title{
     margin-bottom: 30px;

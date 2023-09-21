@@ -2,6 +2,14 @@ let verdictRequest = document.getElementById('verdictRequest');
 
 verdictRequest.addEventListener('click', function(e) {
   e.preventDefault();
+  let verdictElement = document.getElementById('verdictResponse');
+  verdictElement.innerHTML = "Inputs Recieved...";
+  let outputImg = document.getElementById('output-img-box');
+  outputImg.innerHTML = "";
+  // dealy for 2 seconds
+  setTimeout(function() {
+    verdictElement.innerHTML =  "Processing...";
+  }, 2000);
   let petitioner_name = document.getElementById('petitionerName').value;
   let respondent_name = document.getElementById('respondentName').value;
   let facts = document.getElementById('factsCollected').value;
@@ -21,13 +29,13 @@ verdictRequest.addEventListener('click', function(e) {
   }).then(function(response) {
     if(response.ok) {
       response.json().then(function(data) {
-        let input = `<img class="output-img" src="static/assets/explanation_image.png" alt="" height="200vw" id="output-img">`
-        let outputImg = document.getElementById('output-img-box');
+        console.log(data);
+        let input = `<img class="output-img" src="" alt="Statistics" id="output-img">`;
         outputImg.innerHTML = input;
+        let outputImgElement = document.getElementById('output-img');
+        outputImgElement.src = "data:image/jpeg;base64,{{" + data['image'] + "}}";
         let verdict = data['verdict'];
-        let verdictElement = document.getElementById('verdictResponse');
         verdictElement.innerHTML = verdict;
-        // console.log(data);
       });
     } else {
       throw new Error('Something went wrong');
@@ -35,11 +43,5 @@ verdictRequest.addEventListener('click', function(e) {
   })
   .catch(function(error) {
     console.log(error);
-  });
-  // .then(function(response) {
-  //   let verdict = response['verdict'];
-  //   let verdictElement = document.getElementById('verdictResponse');
-  //   verdictElement.innerHTML = verdict;
-  // });
-  
+  });  
 });
