@@ -76,13 +76,19 @@
   
       <section class="container-fluid" id="registration">
         <legend>Registration</legend>
-        <form action="#" method="post">
+        <form action="/register" method="post">
           <fieldset class="reg-card shadow">
-            <div class="row g-3">
+            <div class="row g-3 mb-3">
               <div class="col">
-                <label for="name" class="form-label">Name:</label>
-                 <input class="form-control" type="text" name="name" id="name" required autocomplete="name">
+                <label for="firstName" class="form-label">First Name:</label>
+                <input type="text" name="firstName" id="firstName" class="form-control" required autocomplete="given-name">
               </div>
+              <div class="col">
+                <label for="lastName" class="form-label">Name:</label>
+                <input class="form-control" type="text" name="lastName" id="lastName" required autocomplete="family-name">
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
               <div class="col">
                 <label for="street" class="form-label">Street:</label>
                 <input type="text" name="street" id="street" class="form-control" required autocomplete="address-line1">
@@ -95,6 +101,8 @@
                 <label for="state" class="form-label">State:</label>
                 <input class="form-control" type="text" name="state" id="state" required autocomplete="address-level1">
               </div>
+            </div>
+            <div class="row g-3 mb-3">
               <div class="col">
                 <label for="zip" class="form-label">Zip:</label>
                 <input class="form-control" type="text" name="zip" id="zip" required autocomplete="postal-code">
@@ -106,6 +114,8 @@
                   <input class="form-control" type="tel" name="contact" id="contact" minlength="10" maxlength="10" required autocomplete="tel">
                 </span>
               </div>
+            </div>
+            <div class="row g-3 mb-3">
               <div class="col">
                 <label for="caseType" class="form-label">Case Type:</label>
                 <input class="form-control" type="text" name="caseType" id="caseType">

@@ -33,7 +33,7 @@ verdictRequest.addEventListener('click', function(e) {
         let input = `<img class="output-img" src="" alt="Statistics" id="output-img">`;
         outputImg.innerHTML = input;
         let outputImgElement = document.getElementById('output-img');
-        outputImgElement.src = "data:image/jpeg;base64,{{" + data['image'] + "}}";
+        outputImgElement.src = data['image'];
         let verdict = data['verdict'];
         verdictElement.innerHTML = verdict;
       });
