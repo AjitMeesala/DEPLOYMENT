@@ -71,20 +71,30 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-}
+    background-image:url(./assets/register-bg.jpg);
+    background-size: cover;
 
-.reg-card{
-    display: flex;
-    flex-direction: column;
-    background-color: #E0F2F1;
-    padding: 20px;
-    border-radius: 20px;
-    width: 60vw;
-    justify-content: space-around;
-}
+    & legend {
+        font-family:'Times New Roman', Times, serif;
+        font-weight: 600;
+        letter-spacing: 5pt;
+    }
 
-input{
-    margin-bottom: 20px;
+    & .reg-card{
+        display: flex;
+        flex-direction: column;
+        background-color: #FFFF90;
+        padding: 20px;
+        border-radius: 20px; 
+        width: 60vw;
+        justify-content: space-around;
+
+        & label {
+            font-weight: 700;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+    }
 }
 
 /*-------------------------------registration--------------------------------*/
+

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -33,9 +33,9 @@ def db_connect(app):
     connection = mysql.connector.connect(host = 'localhost', port = 3306, user = 'root', password = '', database = 'docket')
     return connection
 
-def insert_data(name, lawyer, case, contact):
+def insert_data(firstName, lastName, lawyerName, street, city, state, zip, caseType, contact):
     cursor = conn.cursor()
-    cursor.execute('''INSERT INTO `data` (`userName`, `lawyerName`, `caseType`, `contact`) VALUES (%s, %s, %s, %s)''',(name, lawyer, case, contact))
+    cursor.execute('''INSERT INTO `docket`.`data` (`firstName`, `lastName`, `lawyerName`, `street`, `city`, `state`, `zip`, `caseType`, `contact`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');''',firstName, lastName, lawyerName, street, city, state, zip, caseType, contact)
     conn.commit()
     cursor.close()
 
@@ -147,6 +147,32 @@ def submit():
     # return render_template('index.html',Bot=' {}'.format(res), Human=' {}'.format(input_string))
     return response
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method=="POST":
+        # request_data = request.get_json()
+        # firstName = request_data["firstName"]
+        # lastName = request_data["lastName"]
+        # lawyerName = request_data["lawyerName"]
+        # street = request_data["street"]
+        # city = request_data["city"]
+        # state = request_data["state"]
+        # zip = request_data["zip"]
+        # caseType = request_data["caseType"]
+        # contact = request_data["contact"]
+        firstName = request.form.get("firstName")
+        lastName = request.form.get("lastName")
+        lawyerName = request.form.get("lawyerName")
+        street = request.form.get("street")
+        city = request.form.get("city")
+        state = request.form.get("state")
+        zip = request.form.get("zip")
+        caseType = request.form.get("caseType")
+        contact = request.form.get("contact")
+        insert_data(firstName, lastName, lawyerName, street, city, state, zip, caseType, contact)
+        return redirect("/")
+    return "Failed"
+
 if __name__=="__main__":
-    # app.run(debug = True, host='192.168.137.1', port=5000)
+    # app.run(debug = True, host='192.168.137.129', port=5000)
     app.run(debug = True)

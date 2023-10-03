@@ -74,17 +74,18 @@
           </div>
       </section>
   
-      <section class="container-fluid" id="registration">
-        <legend>Registration</legend>
+      <section class="container-fluid d-flex" id="registration">
         <form action="/register" method="post">
-          <fieldset class="reg-card shadow">
+          <fieldset class="reg-card shadow mt-3">
+            <legend class="text-center mb-1 mt-1">Registration</legend>
+            <hr>
             <div class="row g-3 mb-3">
               <div class="col">
                 <label for="firstName" class="form-label">First Name:</label>
                 <input type="text" name="firstName" id="firstName" class="form-control" required autocomplete="given-name">
               </div>
               <div class="col">
-                <label for="lastName" class="form-label">Name:</label>
+                <label for="lastName" class="form-label">Last Name:</label>
                 <input class="form-control" type="text" name="lastName" id="lastName" required autocomplete="family-name">
               </div>
             </div>
