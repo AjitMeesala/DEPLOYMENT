@@ -7,10 +7,11 @@
     
     <link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
-    <nav id="nav" class="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
+    <nav id="nav" class="navbar navbar-expand-lg fixed-top" data-bs-theme="dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Verdict Predictor</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +32,7 @@
                 <a class="nav-link" href="#docket">Docket</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#instructions">Instructions</a>
+                <a class="nav-link" href="#instructions">About</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#contactUs">Contact Us</a>
@@ -58,25 +59,82 @@
           <div class="" id="input">
             <fieldset>
               <legend>Verdict Predictor</legend>
+              <hr>
               <label for="petitionerName" class="form-label">Petitioner Name:</label>
               <input class="form-control" type="text" name="petitionerName" id="petitionerName" placeholder="Lallitendra" value="miller" required autocomplete="name">
               <label for="respondentName" class="form-label">Respondent Name:</label>
               <input class="form-control" type="text" name="respondentName" id="respondentName" placeholder="Jyotsna" value="calfornia" required>
               <label for="factsCollected" class="form-label">Facts Collected:</label>
               <textarea class="form-control" name="factsCollected" id="factsCollected" cols="" rows="5" >Miller, after conducting a mass mailing campaign to advertise the sale of "adult" material, was convicted of violating a California statute prohibiting the distribution of obscene material. Some unwilling recipients of Miller's brochures complained to the police, initiating the legal proceedings.</textarea>
-              <input class="btn btn-primary mb-3" type="submit" value="Submit" id="verdictRequest">
+              <input class="btn btn-primary mb-3 form-control" type="submit" value="Get Verdict..." id="verdictRequest">
             </fieldset>
           </div>
           <div id="output">
-            <h2 class="output-title"><u>Output: -</u></h2>
-            <span id="output-img-box"></span>
+            <h2 class="output-title mb-3">Output: -</h2>
+            <hr>
+            <span id="output-img-box">
+              <img class="output-img" src="{{url_for('static', filename='assets/enter-instruct.jpg')}}" alt="Statistics" id="output-img">
+            </span>
             <textarea class="form-control" name="predcitDescription" id="verdictResponse" cols="20" rows="4" aria-readonly="true" readonly>Please enter details to predict the verdict...</textarea>
           </div>
       </section>
   
       <section class="container-fluid d-flex" id="registration">
+        {% if status=='success' %}
+        <!-- Modal -->
+        <button type="button" class="btn btn-primary" id="openModalButton" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: none;">
+          Launch demo modal
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Registration Status</h1>
+                <a href="/"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+              </div>
+              <div class="modal-body">
+                Successfully Registered!
+              </div>
+              <div class="modal-footer">
+                <a href="/"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          $(document).ready(function() {
+              $("#openModalButton").click();
+          });
+        </script>
+        {% elif status=='failed' %}
+        <!-- Modal -->
+        <button type="button" class="btn btn-primary" id="openModalButton" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: none;">
+          Launch demo modal
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Registration Status</h1>
+                <a href="/"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+              </div>
+              <div class="modal-body">
+                Registration Failed!
+              </div>
+              <div class="modal-footer">
+                <a href="/"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          $(document).ready(function() {
+              $("#openModalButton").click();
+          });
+        </script>
+        {% endif %}
         <form action="/register" method="post">
-          <fieldset class="reg-card shadow mt-3">
+          <fieldset class="reg-card mt-3">
             <legend class="text-center mb-1 mt-1">Registration</legend>
             <hr>
             <div class="row g-3 mb-3">
@@ -132,105 +190,55 @@
       </section>
   
       <section class="container-fluid" id="docket">
-        <div class="d-flex">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="filter" id="solved" checked>
-            <label for="solved" class="form-check-label">Solved</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="filter" id="unsolved">
-            <label for="unsolved" class="form-check-label">Unsolved</label>
-          </div>
-        </div>
+        <h2>Docket</h2>
         <div>
-          <table border="1">
+          <table class="table table-hover">
             <thead>
-              <th>Date</th>
-              <th>Name of the Opponent</th>
-              <th>Lawyer Name</th>
-              <th>Case Type</th>
-              <th>ID</th>
-              <th>Contact</th>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Lawyer Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Case Type</th>
+              <th scope="col">Contact</th>
+              <th scope="col">Date</th>
             </thead>
-            <tr>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
-            <tr>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-              <td>sample</td>
-            </tr>
+            <tbody>
+              {% for row in data %}
+              <tr>
+                <td scope="row">{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{row[4]}}</td>
+                <td>{{row[5]}}</td>
+                <td>{{row[6]}}</td>
+                <td>{{row[7]}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
           </table>
         </div>
       </section>
   
       <section class="container-fluid" id="instructions">
-        <div><h2><u>Instructions</u></h2></div>
+        <div><h2 class="">About</h2></div>
         <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, saepe velit! Eius nobis magni illo enim? Reprehenderit, quae. Neque eos id eaque nihil iure minima atque incidunt voluptatibus natus facilis.
-          Animi debitis error minima quod dignissimos? Veritatis dicta odio animi. Debitis, sint recusandae. Aut, maiores veritatis! Aliquid provident eveniet aut optio excepturi porro nihil sapiente laborum in eos? Consequatur, debitis.
-          Quod ab aperiam, quaerat distinctio, fugiat cumque nisi soluta a repellendus, voluptates consequuntur repellat minus ipsam quo minima dolores nostrum commodi quibusdam eaque repudiandae modi vitae? Ullam sed cumque adipisci.
-          Eligendi laboriosam aut in omnis voluptate tempore eius aspernatur asperiores animi fuga repudiandae, obcaecati iste eaque totam aperiam sit facilis repellat perferendis ipsam fugiat alias. Pariatur eos deserunt dolor cumque!
-          Quae, natus officia provident architecto autem animi laudantium illum saepe rerum molestias reiciendis asperiores atque incidunt ut dolor nostrum tenetur alias quibusdam ullam fugit, reprehenderit, iusto repudiandae optio. Cumque, quaerat!
-          Amet, nihil enim velit doloremque voluptate quas unde veritatis error blanditiis rem eligendi incidunt delectus possimus corrupti ab quo odit inventore perspiciatis nemo iste? Alias illum quos aut voluptas. Aut.
-          Hic ipsa vel doloremque atque doloribus quos fugiat a accusantium dolor nam distinctio quae, quod exercitationem repellat, sunt ex incidunt? Quod fugiat optio aut error dolor excepturi nemo nostrum ea.
-          Cupiditate consectetur reiciendis, dolorem repellendus numquam iure ad impedit ea consequatur recusandae dignissimos quidem provident quo architecto. Et expedita itaque nemo sapiente cum adipisci iure possimus dolore similique consequatur! Nostrum.
-          Accusamus consequuntur dolor ut eos sit, quasi eaque voluptate ad totam porro tenetur, doloremque blanditiis nihil. Deleniti, possimus. Tempore dolores, laudantium perspiciatis dolore tempora quae aperiam sint aspernatur rerum ipsam?
-          Quae magni quod blanditiis sequi ipsam cum fuga ad quasi, dolorem excepturi eum maiores alias voluptatem dolores labore consectetur totam aperiam repellendus harum sapiente. Quibusdam, nulla culpa? Ipsa, neque iure.
+          <p>This Project deals with predicting the verdict of the given case filed in the court.The Supreme court of India has launched "SUPACE" (Supreme Court Portal for Assistance in Courts Efficiency) to collect and analyse the data ,"SUVAS" (Supreme Court Vidhik Anuvaad Software) to translate legal papers from English into vernacular languages and vice-versa and many other to automate the work in judicial system.There are around 41861760 pending cases in supreme court ,in which one-third are civil cases which can be dealt within less court sessions. Hence this project dealts with predicting the verdict by infering the previous cases which are similar to the case filed ,evidences provided and also displays the amendaments by which the punishment is given to the culprit. Using natural language processing ,the documents filed are parsed and given to the model previously built by feeding past hearings and the output is generated.  The client under the consultation of lawyer can fill all the details to the court website and from there it can be given to the model when he/she is scheduled. Due to this automation there would be transparency in judiciary, thereby making the court system timely and optimal.</p>
         </div>
       </section>
   
       <section class="container-fluid" id="contactUs">
         <div>
-          <div>
-            <img src="" alt="">
-          </div>
-          <div>
-            <img src="" alt="">
-          </div>
-          <div>
-            <img src="" alt="">
-          </div>
-          <div>
-            <img src="" alt="">
-          </div>
-        </div>
-        
-        <div>
           <form action="#" method="post">
             <fieldset>
               <legend>Contact Us</legend>
               <label for="cName" class="form-label">Name:</label>
-              <input class="form-control" type="text" name="cName" id="cName" required autocomplete="name">
+              <input class="form-control mb-3" type="text" name="cName" id="cName" required autocomplete="name">
               <label for="cEmail" class="form-label">Email:</label>
-              <input class="form-control" type="email" name="cEmail" id="cEmail" required autocomplete="email">
+              <input class="form-control mb-3" type="email" name="cEmail" id="cEmail" required autocomplete="email">
               <label for="cMessage" class="form-label">Message:</label>
-              <textarea class="form-control" name="message" id="cMessage" cols="21" rows="5" required></textarea>
-              <input class="btn btn-primary mb-3" type="submit" value="Submit">
+              <textarea class="form-control mb-3" name="message" id="cMessage" cols="21" rows="5" required></textarea>
+              <input class="btn btn-primary form-control" type="submit" value="Submit">
             </fieldset>
           </form>
         </div>

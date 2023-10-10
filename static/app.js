@@ -2,19 +2,16 @@ let verdictRequest = document.getElementById('verdictRequest');
 
 verdictRequest.addEventListener('click', function(e) {
   e.preventDefault();
+  verdictRequest.disabled = true;
+  verdictRequest.value = 'Wait...';
   let verdictElement = document.getElementById('verdictResponse');
-  verdictElement.innerHTML = "Inputs Recieved...";
-  let outputImg = document.getElementById('output-img-box');
-  outputImg.innerHTML = "";
-  // dealy for 2 seconds
-  setTimeout(function() {
-    verdictElement.innerHTML =  "Processing...";
-  }, 2000);
+  verdictElement.innerHTML = "Reading Inputs...";
+  let outputImgElement = document.getElementById('output-img');
   let petitioner_name = document.getElementById('petitionerName').value;
   let respondent_name = document.getElementById('respondentName').value;
   let facts = document.getElementById('factsCollected').value;
-
-  // facts = petitioner_name + " " + respondent_name + " " + facts;
+  outputImgElement.src = "static/assets/thinking.gif";
+  verdictElement.innerHTML = "Calculating Verdict...";
 
   fetch('/verdict', {
     method: 'POST',
@@ -29,13 +26,11 @@ verdictRequest.addEventListener('click', function(e) {
   }).then(function(response) {
     if(response.ok) {
       response.json().then(function(data) {
-        console.log(data);
-        let input = `<img class="output-img" src="" alt="Statistics" id="output-img">`;
-        outputImg.innerHTML = input;
-        let outputImgElement = document.getElementById('output-img');
         outputImgElement.src = data['image'];
         let verdict = data['verdict'];
         verdictElement.innerHTML = verdict;
+        verdictRequest.disabled = false;
+        verdictRequest.value = 'Get Verdict...';
       });
     } else {
       throw new Error('Something went wrong');
@@ -43,5 +38,6 @@ verdictRequest.addEventListener('click', function(e) {
   })
   .catch(function(error) {
     console.log(error);
-  });  
+    verdictRequest.value = 'Error...Refresh Page';
+  });
 });

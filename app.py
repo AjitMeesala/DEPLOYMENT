@@ -14,9 +14,6 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 from flask_mysqldb import MySQL
 import mysql.connector
-from PIL import Image
-import io
-import base64
 # nltk.download('punkt')
 # nltk.download('wordnet')
 
@@ -33,11 +30,18 @@ def db_connect(app):
     connection = mysql.connector.connect(host = 'localhost', port = 3306, user = 'root', password = '', database = 'docket')
     return connection
 
-def insert_data(firstName, lastName, lawyerName, street, city, state, zip, caseType, contact):
+def insert_data(name, lawyerName, address, caseType, contact):
     cursor = conn.cursor()
-    cursor.execute('''INSERT INTO `docket`.`data` (`firstName`, `lastName`, `lawyerName`, `street`, `city`, `state`, `zip`, `caseType`, `contact`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');''',firstName, lastName, lawyerName, street, city, state, zip, caseType, contact)
+    cursor.execute('INSERT INTO `docket`.`data` (`name`, `lawyerName`, `address`, `caseType`, `contact`) VALUES (%s, %s, %s, %s, %s);',(name, lawyerName, address, caseType, contact))
     conn.commit()
     cursor.close()
+
+def get_data():
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM `docket`.`data`;')
+    data = cursor.fetchall()
+    cursor.close()
+    return data
 
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
@@ -116,7 +120,7 @@ conn = db_connect(app)
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('index.html', data = get_data())
 
 @app.route("/predict", methods=["GET", "POST"])
 def home():
@@ -142,7 +146,7 @@ def submit():
             response = {"verdict": res, "image": img}
         except:
             res="Unable to make decision !!!"
-            response = {"verdict": res, "image": ""}
+            response = {"verdict": res, "image": "static/assets/invalid.jpg"}
         
     # return render_template('index.html',Bot=' {}'.format(res), Human=' {}'.format(input_string))
     return response
@@ -150,16 +154,6 @@ def submit():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method=="POST":
-        # request_data = request.get_json()
-        # firstName = request_data["firstName"]
-        # lastName = request_data["lastName"]
-        # lawyerName = request_data["lawyerName"]
-        # street = request_data["street"]
-        # city = request_data["city"]
-        # state = request_data["state"]
-        # zip = request_data["zip"]
-        # caseType = request_data["caseType"]
-        # contact = request_data["contact"]
         firstName = request.form.get("firstName")
         lastName = request.form.get("lastName")
         lawyerName = request.form.get("lawyerName")
@@ -169,9 +163,11 @@ def register():
         zip = request.form.get("zip")
         caseType = request.form.get("caseType")
         contact = request.form.get("contact")
-        insert_data(firstName, lastName, lawyerName, street, city, state, zip, caseType, contact)
-        return redirect("/")
-    return "Failed"
+        name = firstName + " " + lastName
+        address = street + ", " + city + ", " + state + ", " + zip
+        insert_data(name, lawyerName, address, caseType, contact)
+        return render_template('index.html', status="success")
+    return render_template('index.html', status="failed")
 
 if __name__=="__main__":
     # app.run(debug = True, host='192.168.137.129', port=5000)
