@@ -116,7 +116,7 @@ def initiate(temp):
 app = Flask(__name__)
 
 #Connecting to the Database
-conn = db_connect(app)
+# conn = db_connect(app)
 
 @app.route("/")
 def index():
