@@ -12,8 +12,8 @@ from keras import layers
 import random
 import nltk
 from nltk.stem import WordNetLemmatizer
-from flask_mysqldb import MySQL
-import mysql.connector
+# from flask_mysqldb import MySQL
+# import mysql.connector
 nltk.download('punkt')
 nltk.download('wordnet')
 
