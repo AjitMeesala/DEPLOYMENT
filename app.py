@@ -26,22 +26,22 @@ lemmatizer = WordNetLemmatizer()
 
 # punishment or article violation##################################################################### 
 
-def db_connect(app):
-    connection = mysql.connector.connect(host = 'localhost', port = 3306, user = 'root', password = '', database = 'docket')
-    return connection
+# def db_connect(app):
+#     connection = mysql.connector.connect(host = 'localhost', port = 3306, user = 'root', password = '', database = 'docket')
+#     return connection
 
-def insert_data(name, lawyerName, address, caseType, contact):
-    cursor = conn.cursor()
-    cursor.execute('INSERT INTO `docket`.`data` (`name`, `lawyerName`, `address`, `caseType`, `contact`) VALUES (%s, %s, %s, %s, %s);',(name, lawyerName, address, caseType, contact))
-    conn.commit()
-    cursor.close()
+# def insert_data(name, lawyerName, address, caseType, contact):
+#     cursor = conn.cursor()
+#     cursor.execute('INSERT INTO `docket`.`data` (`name`, `lawyerName`, `address`, `caseType`, `contact`) VALUES (%s, %s, %s, %s, %s);',(name, lawyerName, address, caseType, contact))
+#     conn.commit()
+#     cursor.close()
 
-def get_data():
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM `docket`.`data`;')
-    data = cursor.fetchall()
-    cursor.close()
-    return data
+# def get_data():
+#     cursor = conn.cursor()
+#     cursor.execute('SELECT * FROM `docket`.`data`;')
+#     data = cursor.fetchall()
+#     cursor.close()
+#     return data
 
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
@@ -120,7 +120,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('index.html', data = get_data())
+    # return render_template('index.html', data = get_data())
+    return render_template('index.html', data = {})
 
 @app.route("/predict", methods=["GET", "POST"])
 def home():
@@ -165,7 +166,7 @@ def register():
         contact = request.form.get("contact")
         name = firstName + " " + lastName
         address = street + ", " + city + ", " + state + ", " + zip
-        insert_data(name, lawyerName, address, caseType, contact)
+        # insert_data(name, lawyerName, address, caseType, contact)
         return render_template('index.html', status="success")
     return render_template('index.html', status="failed")
 
