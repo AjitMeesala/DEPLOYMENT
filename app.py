@@ -14,8 +14,8 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 from flask_mysqldb import MySQL
 import mysql.connector
-# nltk.download('punkt')
-# nltk.download('wordnet')
+nltk.download('punkt')
+nltk.download('wordnet')
 
 
 intents = json.loads(open('intents.json').read())
