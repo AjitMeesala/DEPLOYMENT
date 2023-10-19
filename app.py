@@ -12,8 +12,8 @@ from keras import layers
 import random
 import nltk
 from nltk.stem import WordNetLemmatizer
-# from flask_mysqldb import MySQL
-# import mysql.connector
+from flask_mysqldb import MySQL
+import mysql.connector
 nltk.download('punkt')
 nltk.download('wordnet')
 
@@ -26,22 +26,22 @@ lemmatizer = WordNetLemmatizer()
 
 # punishment or article violation##################################################################### 
 
-# def db_connect(app):
-#     connection = mysql.connector.connect(host = 'localhost', port = 3306, user = 'root', password = '', database = 'docket')
-#     return connection
+def db_connect(app):
+    connection = mysql.connector.connect(host = 'localhost', port = 3306, user = 'root', password = '', database = 'docket')
+    return connection
 
-# def insert_data(name, lawyerName, address, caseType, contact):
-#     cursor = conn.cursor()
-#     cursor.execute('INSERT INTO `docket`.`data` (`name`, `lawyerName`, `address`, `caseType`, `contact`) VALUES (%s, %s, %s, %s, %s);',(name, lawyerName, address, caseType, contact))
-#     conn.commit()
-#     cursor.close()
+def insert_data(name, lawyerName, address, caseType, contact):
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO `docket`.`data` (`name`, `lawyerName`, `address`, `caseType`, `contact`) VALUES (%s, %s, %s, %s, %s);',(name, lawyerName, address, caseType, contact))
+    conn.commit()
+    cursor.close()
 
-# def get_data():
-#     cursor = conn.cursor()
-#     cursor.execute('SELECT * FROM `docket`.`data`;')
-#     data = cursor.fetchall()
-#     cursor.close()
-#     return data
+def get_data():
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM `docket`.`data`;')
+    data = cursor.fetchall()
+    cursor.close()
+    return data
 
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
@@ -84,9 +84,7 @@ def initiate(temp):
     text_vectorization_bi_tfidf = keras.layers.TextVectorization(
         ngrams=2,
         max_tokens=20000,
-        output_mode = "tf_idf",
-        # standardize=custom_standardization_fn,
-        # split=custom_split_fn
+        output_mode = "tf_idf"
     ) 
     X_train = pd.read_csv('X_train.csv')
     text_vectorization_bi_tfidf.adapt(X_train)   
@@ -116,12 +114,12 @@ def initiate(temp):
 app = Flask(__name__)
 
 #Connecting to the Database
-# conn = db_connect(app)
+conn = db_connect(app)
 
 @app.route("/")
 def index():
-    # return render_template('index.html', data = get_data())
-    return render_template('index.html', data = {})
+    return render_template('index.html', data = get_data())
+    # return render_template('index.html', data = {})
 
 @app.route("/predict", methods=["GET", "POST"])
 def home():
@@ -148,8 +146,6 @@ def submit():
         except:
             res="Unable to make decision !!!"
             response = {"verdict": res, "image": "static/assets/invalid.jpg"}
-        
-    # return render_template('index.html',Bot=' {}'.format(res), Human=' {}'.format(input_string))
     return response
 
 @app.route("/register", methods=["GET", "POST"])
@@ -166,7 +162,7 @@ def register():
         contact = request.form.get("contact")
         name = firstName + " " + lastName
         address = street + ", " + city + ", " + state + ", " + zip
-        # insert_data(name, lawyerName, address, caseType, contact)
+        insert_data(name, lawyerName, address, caseType, contact)
         return render_template('index.html', status="success")
     return render_template('index.html', status="failed")
 
